@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
+import { CheckoutFormComponent } from './components/checkout-form/checkout-form.component';
 import { RouterOutlet } from '@angular/router';
-
 @Component({
   selector: 'app-root',
   standalone: true,

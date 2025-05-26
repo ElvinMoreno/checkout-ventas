@@ -1,0 +1,227 @@
+<div *ngIf="isLoading" class="text-center py-12">
+  <div class="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500 mb-4"></div>
+  <p class="text-white">Loading invoice data...</p>
+</div>
+
+<!-- Error state -->
+<div *ngIf="hasError" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-6" role="alert">
+  <strong class="font-bold">Error!</strong>
+  <span class="block sm:inline">{{ errorMessage }}</span>
+  <button (click)="loadInvoiceData(invoiceCode)" class="mt-2 bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">
+    Try Again
+  </button>
+</div>
+
+<div *ngIf="!isLoading && !hasError && invoiceData" class="min-h-screen py-8 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-8">
+      <h1 class="text-3xl font-extrabold text-white">Secure Checkout</h1>
+      <p class="mt-2 text-slate-400">Complete your purchase securely</p>
+      <div class="mt-4 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded inline-block">
+        <strong>Transaction Code:</strong> {{ invoiceData.codigoTransaccion }} |
+        <strong>Status:</strong> {{ invoiceData.estado }}
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <div class="lg:col-span-7">
+        <div class="bg-white dark:bg-slate-800 shadow-2xl rounded-xl p-8">
+          <form id="checkoutForm" (ngSubmit)="onSubmit()" class="space-y-8">
+            <div>
+              <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-6 pb-2 border-b border-gray-200 dark:border-slate-600">
+                Personal Information
+              </h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label for="firstName" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">First Name</label>
+                  <input id="firstName" name="firstName" type="text" required
+                         [(ngModel)]="checkoutData.fullName.split(' ')[0]"
+                         class="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                         placeholder="John">
+                </div>
+                <div>
+                  <label for="lastName" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Last Name</label>
+                  <input id="lastName" name="lastName" type="text" required
+                         [(ngModel)]="checkoutData.fullName.split(' ')[1]"
+                         class="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                         placeholder="Doe">
+                </div>
+              </div>
+              <div class="mt-4">
+                <label for="identification" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Identification Number</label>
+                <input id="identification" name="identification" type="text" required
+                       [(ngModel)]="invoiceData.cliente.cedula"
+                       class="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                       placeholder="Enter your ID number">
+              </div>
+              <div class="mt-4">
+                <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Email Address</label>
+                <input id="email" name="email" type="email" required
+                       [(ngModel)]="checkoutData.email"
+                       class="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                       placeholder="john.doe@example.com">
+              </div>
+            </div>
+
+            <div>
+              <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-6 pb-2 border-b border-gray-200 dark:border-slate-600">
+                Shipping Address
+              </h3>
+              <div class="space-y-4">
+                <div>
+                  <label for="address" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Street Address</label>
+                  <input id="address" name="address" type="text" required
+                         [(ngModel)]="invoiceData.cliente.direccion"
+                         class="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                         placeholder="123 Main Street">
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label for="city" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">City</label>
+                    <input id="city" name="city" type="text" required
+                           [(ngModel)]="checkoutData.city"
+                           class="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                           placeholder="New York">
+                  </div>
+                  <div>
+                    <label for="country" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Country</label>
+                    <select id="country" name="country" required
+                            [(ngModel)]="checkoutData.country"
+                            class="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                      <option value="">Select Country</option>
+                      <option value="US">Ecuador</option>
+                      <option value="CA">Peru</option>
+                      <option value="MX">Mexico</option>
+                      <option value="ES">Spain</option>
+                      <option value="FR">France</option>
+                      <option value="DE">Argentina</option>
+                      <option value="IT">Italy</option>
+                      <option value="IT">Colombia</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-6 pb-2 border-b border-gray-200 dark:border-slate-600">
+                Payment Details
+              </h3>
+              <div class="space-y-4">
+                <div>
+                  <label for="cardNumber" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Card Number</label>
+                  <input id="cardNumber" name="cardNumber" type="text" required
+                         [(ngModel)]="checkoutData.cardNumber"
+                         class="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                         placeholder="1234 5678 9012 3456"
+                         maxlength="19">
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                  <div>
+                    <label for="expiryDate" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Expiry Date</label>
+                    <input id="expiryDate" name="expiryDate" type="text" required
+                           [(ngModel)]="checkoutData.expiryDate"
+                           class="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                           placeholder="MM/YY"
+                           maxlength="5">
+                  </div>
+                  <div>
+                    <label for="cvv" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">CVV</label>
+                    <input id="cvv" name="cvv" type="text" required
+                           [(ngModel)]="checkoutData.cvv"
+                           class="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                           placeholder="123"
+                           maxlength="4">
+                  </div>
+                </div>
+                <div>
+                  <label for="cardName" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Cardholder Name</label>
+                  <input id="cardName" name="cardName" type="text" required
+                         [(ngModel)]="checkoutData.fullName"
+                         class="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                         placeholder="John Doe">
+                </div>
+              </div>
+            </div>
+
+            <div class="pt-6">
+              <button type="submit"
+                      class="w-full bg-indigo-600 text-white py-4 px-6 rounded-lg text-lg font-semibold hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-slate-800 transition-colors duration-200 disabled:bg-slate-400 dark:disabled:bg-slate-600">
+                Complete Order
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Order Summary -->
+      <div class="lg:col-span-5">
+        <div class="bg-white dark:bg-slate-800 shadow-2xl rounded-xl p-8 sticky top-8">
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-6 pb-2 border-b border-gray-200 dark:border-slate-600">
+            Order Summary
+          </h3>
+
+          <div class="space-y-4 mb-6">
+            <div *ngFor="let detalle of invoiceData.detalles" class="flex items-center space-x-4 p-4 bg-gray-50 dark:bg-slate-700 rounded-lg">
+              <div class="w-16 h-16 bg-gradient-to-br from-indigo-400 to-purple-500 rounded-lg flex items-center justify-center">
+                <span class="text-white font-bold text-lg">P{{ detalle.producto.id }}</span>
+              </div>
+              <div class="flex-1">
+                <h4 class="font-medium text-gray-900 dark:text-white">{{ detalle.producto.producto.nombre }}</h4>
+                <p class="text-sm text-gray-500 dark:text-gray-400">
+                  {{ detalle.producto.producto.categoria }} -
+                  Color: {{ detalle.producto.color.nombre }},
+                  Size: {{ detalle.producto.talla.nombre }}
+                </p>
+                <div class="flex items-center mt-1">
+                  <span class="text-sm text-gray-500 dark:text-gray-400">Qty: {{ detalle.cantidad }}</span>
+                </div>
+              </div>
+              <div class="text-right">
+                <p class="font-semibold text-gray-900 dark:text-white">${{ detalle.subtotal | number:'1.2-2' }}</p>
+                <p class="text-sm text-gray-500 dark:text-gray-400">${{ detalle.precioUnitario | number:'1.2-2' }} each</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-3 border-t border-gray-200 dark:border-slate-600 pt-6">
+            <div class="flex justify-between items-center">
+              <span class="text-gray-600 dark:text-gray-400">Subtotal</span>
+              <span class="font-medium text-gray-900 dark:text-white">${{ invoiceData.subtotal | number:'1.2-2' }}</span>
+            </div>
+
+            <div class="flex justify-between items-center">
+              <span class="text-gray-600 dark:text-gray-400">Shipping</span>
+              <span class="font-medium text-gray-900 dark:text-white">${{ invoiceData.envio.precio | number:'1.2-2' }}</span>
+            </div>
+
+            <div class="flex justify-between items-center pt-3 border-t border-gray-200 dark:border-slate-600">
+              <span class="text-lg font-semibold text-gray-900 dark:text-white">Total</span>
+              <span class="text-xl font-bold text-indigo-600 dark:text-indigo-400">${{ invoiceData.total | number:'1.2-2' }}</span>
+            </div>
+          </div>
+
+          <div class="mt-6 pt-6 border-t border-gray-200 dark:border-slate-600">
+            <div class="flex space-x-2">
+              <input type="text" placeholder="Promo code"
+                     class="flex-1 px-4 py-2 border border-gray-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+              <button type="button"
+                      class="px-4 py-2 bg-gray-200 dark:bg-slate-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-300 dark:hover:bg-slate-500 focus:outline-none focus:ring-2 focus:ring-gray-500 transition-colors duration-200">
+                Apply
+              </button>
+            </div>
+          </div>
+
+          <div class="mt-6 pt-6 border-t border-gray-200 dark:border-slate-600">
+            <div class="flex items-center justify-center space-x-2 text-sm text-gray-500 dark:text-gray-400">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+              </svg>
+              <span>Secured by SSL encryption</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

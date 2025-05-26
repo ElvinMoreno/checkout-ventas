@@ -1,0 +1,16 @@
+<div class="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 py-8 px-4 flex items-center justify-center">
+  <div class="max-w-2xl w-full space-y-8 p-10 bg-white dark:bg-slate-800 shadow-2xl rounded-xl text-gray-900 dark:text-white">
+    <h2 class="text-3xl font-bold text-center">Order Summary</h2>
+
+    <div class="space-y-4">
+      <p><strong>Full Name:</strong> {{ checkoutData.fullName }}</p>
+      <p><strong>Email:</strong> {{ checkoutData.email }}</p>
+      <p><strong>Address:</strong> {{ checkoutData.address }}, {{ checkoutData.city }}, {{ checkoutData.postalCode }}, {{ checkoutData.country }}</p>
+      <p><strong>Card (last 4):</strong> **** **** **** {{ checkoutData.cardNumber?.slice(-4) }}</p>
+    </div>
+
+    <div class="mt-6 text-center">
+      <p class="text-sm text-gray-600 dark:text-gray-300">Por favor, envía esta factura al chat para procesar tu pedido.</p>
+    </div>
+  </div>
+</div>

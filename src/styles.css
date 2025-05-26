@@ -1,1 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Adding a default background to the body for better contrast with the form */
+body {
+    @apply bg-slate-100 dark:bg-slate-900;
+    font-family: 'Inter', sans-serif; /* A nice sans-serif font often used with Tailwind */
+}
+
+/* Ensure html and body take full height for background to cover viewport */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+app-root {
+    display: block; /* Or flex, grid depending on layout needs */
+    min-height: 100vh; /* Ensure app-root can expand to fill viewport height */
+}
