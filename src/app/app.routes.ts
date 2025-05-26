@@ -4,6 +4,6 @@ import { OrderSummaryComponent } from './components/order-summary/order-summary.
 
 export const routes: Routes = [
   { path: '', component: CheckoutFormComponent },
-  { path: ':invoiceCode', component: CheckoutFormComponent }, // Nueva ruta con parámetro
   { path: 'resumen', component: OrderSummaryComponent },
+  { path: ':invoiceCode', component: CheckoutFormComponent },
 ];

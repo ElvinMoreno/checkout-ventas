@@ -1,0 +1,36 @@
+@media print {
+  .print\\:hidden {
+    display: none !important;
+  }
+
+  body {
+    background: white !important;
+  }
+
+  .dark\\:bg-slate-800,
+  .dark\\:bg-slate-700,
+  .dark\\:bg-slate-900 {
+    background: white !important;
+  }
+
+  .dark\\:text-white,
+  .dark\\:text-gray-300,
+  .dark\\:text-gray-400 {
+    color: black !important;
+  }
+
+  .dark\\:border-slate-600,
+  .dark\\:border-slate-700 {
+    border-color: #e5e7eb !important;
+  }
+
+  .shadow-lg {
+    box-shadow: none !important;
+  }
+
+  .bg-gradient-to-r,
+  .bg-gradient-to-br {
+    background: #4f46e5 !important;
+    color: white !important;
+  }
+}
