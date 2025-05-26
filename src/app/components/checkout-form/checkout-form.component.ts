@@ -106,7 +106,7 @@ export class CheckoutFormComponent implements OnInit {
       lastName &&
       identification &&
       this.checkoutData.email?.trim() &&
-      this.invoiceData.cliente.direccion?.trim() &&
+      this.invoiceData.envio!.ubicacion?.trim() &&
       this.checkoutData.city?.trim() &&
       this.checkoutData.country?.trim() &&
       this.checkoutData.cardNumber?.replace(/\s/g, '').length >= 13 &&
