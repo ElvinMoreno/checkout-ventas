@@ -2,8 +2,6 @@
   <div class="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500 mb-4"></div>
   <p class="text-white">Loading invoice data...</p>
 </div>
-
-<!-- Error state -->
 <div *ngIf="hasError" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-6" role="alert">
   <strong class="font-bold">Error!</strong>
   <span class="block sm:inline">{{ errorMessage }}</span>

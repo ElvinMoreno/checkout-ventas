@@ -140,28 +140,22 @@ export class CheckoutFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Verificar si estamos en la ruta de resumen
     if (this.router.url === '/resumen') {
       console.log('Estamos en la página de resumen, no cargar datos de factura');
       this.isLoading = false;
       return;
     }
-
-    // Solo cargar datos si no hemos completado el pago y no estamos en resumen
     if (!this.paymentCompleted) {
       this.route.paramMap.subscribe(params => {
         this.invoiceCode = params.get('invoiceCode') || '';
 
-        // Verificación adicional para evitar cargar 'resumen' como código
         if (this.invoiceCode && this.invoiceCode !== 'resumen') {
           this.loadInvoiceData(this.invoiceCode);
         } else if (!this.invoiceCode) {
-          // Solo mostrar error si realmente no hay código (ruta raíz)
           this.isLoading = false;
           this.hasError = true;
           this.errorMessage = 'No se proporcionó un código de factura en la URL';
         } else {
-          // Si el código es 'resumen', simplemente no hacer nada
           this.isLoading = false;
         }
       });
@@ -169,7 +163,6 @@ export class CheckoutFormComponent implements OnInit {
   }
 
   loadInvoiceData(code: string): void {
-    // Verificaciones adicionales de seguridad
     if (this.paymentCompleted || code === 'resumen' || !code.trim()) {
       console.log('Evitando carga de datos:', { paymentCompleted: this.paymentCompleted, code });
       return;
@@ -275,7 +268,6 @@ export class CheckoutFormComponent implements OnInit {
         console.log('Pago exitoso:', response);
         this.paymentCompleted = true;
 
-        // Navegar al resumen con datos
         this.router.navigate(['/resumen'], {
           state: { paymentData: response }
         });

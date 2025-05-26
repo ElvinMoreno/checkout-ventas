@@ -1,7 +1,6 @@
 <!-- resumen.component.html -->
 <div class="min-h-screen bg-gray-50 dark:bg-slate-900 py-5 px-4 print:py-0 print:px-0">
   <div class="max-w-3xl mx-auto">
-    <!-- Header con botones de acción -->
     <div class="mb-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 print:hidden">
       <h1 class="text-xl font-bold text-gray-900 dark:text-white">Resumen de Compra</h1>
       <div class="flex gap-2">
@@ -19,9 +18,7 @@
       </div>
     </div>
 
-    <!-- Factura Principal -->
     <div class="bg-white dark:bg-slate-800 rounded-lg shadow-lg overflow-hidden border border-gray-200 dark:border-slate-700 print:border-0 print:shadow-none">
-      <!-- Header de la factura -->
       <div class="bg-gradient-to-r from-indigo-600 to-purple-600 px-5 py-4 text-white">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
           <div>
@@ -36,9 +33,7 @@
       </div>
 
       <div class="p-4">
-        <!-- Información compacta -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
-          <!-- Cliente -->
           <div class="space-y-2">
             <h3 class="text-base font-semibold text-gray-900 dark:text-white flex items-center gap-2">
               <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -53,7 +48,6 @@
             </div>
           </div>
 
-          <!-- Envío -->
           <div class="space-y-2">
             <h3 class="text-base font-semibold text-gray-900 dark:text-white flex items-center gap-2">
               <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -68,7 +62,6 @@
           </div>
         </div>
 
-        <!-- Productos -->
         <div class="mb-5">
           <h3 class="text-base font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
             <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -105,7 +98,6 @@
           </div>
         </div>
 
-        <!-- Totales -->
         <div class="bg-gray-50 dark:bg-slate-700 rounded-lg p-4">
           <div class="space-y-2 text-sm">
             <div class="flex justify-between">
@@ -128,8 +120,6 @@
             </div>
           </div>
         </div>
-
-        <!-- Estado -->
         <div class="mt-4 text-center">
           <div class="inline-flex items-center gap-2 bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-400 px-4 py-2 rounded-full">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -142,7 +132,6 @@
       </div>
     </div>
 
-    <!-- Footer -->
     <div class="mt-4 text-center text-sm text-gray-500 dark:text-gray-400 print:hidden">
       <p>Guarde este comprobante</p>
     </div>

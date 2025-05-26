@@ -21,7 +21,6 @@ export class OrderSummaryComponent implements OnInit {
     const navigation = this.router.getCurrentNavigation();
     if (navigation?.extras.state) {
       this.paymentData = navigation.extras.state['paymentData'];
-      // Extraer los datos de la factura de la respuesta del pago
       if (this.paymentData?.data) {
         this.invoiceData = this.paymentData.data;
       }
@@ -35,7 +34,6 @@ export class OrderSummaryComponent implements OnInit {
       return;
     }
 
-    // Formatear fecha actual
     this.currentDate = new Date().toLocaleDateString('es-ES', {
       year: 'numeric',
       month: 'long',
