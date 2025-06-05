@@ -141,7 +141,6 @@ export class CheckoutFormComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.router.url === '/resumen') {
-      console.log('Estamos en la página de resumen, no cargar datos de factura');
       this.isLoading = false;
       return;
     }
@@ -164,7 +163,6 @@ export class CheckoutFormComponent implements OnInit {
 
   loadInvoiceData(code: string): void {
     if (this.paymentCompleted || code === 'resumen' || !code.trim()) {
-      console.log('Evitando carga de datos:', { paymentCompleted: this.paymentCompleted, code });
       return;
     }
 

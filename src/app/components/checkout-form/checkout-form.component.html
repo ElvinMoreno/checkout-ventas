@@ -13,8 +13,8 @@
 <div *ngIf="!isLoading && !hasError && invoiceData" class="min-h-screen py-8 px-4 sm:px-6 lg:px-8">
   <div class="max-w-7xl mx-auto">
     <div class="text-center mb-8">
-      <h1 class="text-3xl font-extrabold text-white">Secure Checkout</h1>
-      <p class="mt-2 text-slate-400">Complete your purchase securely</p>
+      <h1 class="text-3xl font-extrabold text-white">Pago Seguro</h1>
+      <p class="mt-2 text-slate-400">Llene todos los campos</p>
       <div class="mt-4 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded inline-block">
         <strong>Transaction Code:</strong> {{ invoiceData.codigoTransaccion }} |
         <strong>Status:</strong> {{ invoiceData.estado }}
@@ -27,63 +27,62 @@
           <form id="checkoutForm" (ngSubmit)="onSubmit()" class="space-y-8">
             <div>
               <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-6 pb-2 border-b border-gray-200 dark:border-slate-600">
-                Personal Information
+                Información personal
               </h3>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label for="firstName" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">First Name *</label>
+                  <label for="firstName" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Nombres *</label>
                   <input id="firstName" name="firstName" type="text" required
                         [ngModel]="checkoutData.fullName.split(' ')[0] || ''"
                         (ngModelChange)="updateFirstName($event)"
                         class="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-                        placeholder="John">
+                        placeholder="Jose">
                 </div>
                 <div>
-                  <label for="lastName" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Last Name *</label>
+                  <label for="lastName" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Apellidos *</label>
                   <input id="lastName" name="lastName" type="text" required
                         [ngModel]="checkoutData.fullName.split(' ')[1] || ''"
                         (ngModelChange)="updateLastName($event)"
                         class="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-                        placeholder="Doe">
+                        placeholder="Moreno">
                 </div>
               </div>
               <div class="mt-4">
-                <label for="identification" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Identification Number *</label>
+                <label for="identification" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Numero de identificación *</label>
                 <input id="identification" name="identification" type="text" required
                       [(ngModel)]="invoiceData.cliente.cedula"
-                      readonly
                       class="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 rounded-lg bg-gray-100 dark:bg-slate-600 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-slate-400 focus:outline-none"
-                      placeholder="Enter your ID number">
+                      placeholder="Ingrese su cedula">
               </div>
               <div class="mt-4">
-                <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Email Address *</label>
+                <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Dirección de Correo *</label>
                 <input id="email" name="email" type="email" required
                       [(ngModel)]="checkoutData.email"
                       class="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-                      placeholder="john.doe@example.com">
+                      placeholder="elvinmo@example.com">
               </div>
             </div>
 
             <div>
               <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-6 pb-2 border-b border-gray-200 dark:border-slate-600">
-                Shipping Address
+                Dirección envío
               </h3>
               <div class="space-y-4">
                 <div>
-                  <label for="address" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Street Address *</label>
+                  <label for="address" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Dirección *</label>
                   <input id="address" name="address" type="text" required
                         [(ngModel)]="invoiceData!.envio!.ubicacion"
                         readonly
                         class="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 rounded-lg bg-gray-100 dark:bg-slate-600 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-slate-400 focus:outline-none"
-                        placeholder="123 Main Street">
+                        placeholder="123 Calle principal ">
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label for="city" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">City *</label>
+                    <label for="city" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Ciudad *</label>
                     <input id="city" name="city" type="text" required
                           [(ngModel)]="checkoutData.city"
                           class="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-                          placeholder="New York">
+                          placeholder="Bogota">
                   </div>
                   <div>
                     <label for="country" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Country *</label>
@@ -94,10 +93,10 @@
                       <option value="EC">Ecuador</option>
                       <option value="PE">Peru</option>
                       <option value="MX">Mexico</option>
-                      <option value="ES">Spain</option>
-                      <option value="FR">France</option>
+                      <option value="ES">España</option>
+                      <option value="FR">Francia</option>
                       <option value="AR">Argentina</option>
-                      <option value="IT">Italy</option>
+                      <option value="IT">Italia</option>
                       <option value="CO">Colombia</option>
                     </select>
                   </div>
@@ -107,11 +106,11 @@
 
             <div>
               <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-6 pb-2 border-b border-gray-200 dark:border-slate-600">
-                Payment Details
+                Detalle de Pago
               </h3>
               <div class="space-y-4">
                 <div>
-                  <label for="cardNumber" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Card Number *</label>
+                  <label for="cardNumber" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Número de tarjeta *</label>
                   <input id="cardNumber" name="cardNumber" type="text" required
                         [(ngModel)]="checkoutData.cardNumber"
                         (input)="formatCardNumber($event)"
@@ -121,7 +120,7 @@
                 </div>
                 <div class="grid grid-cols-2 gap-4">
                   <div>
-                    <label for="expiryDate" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Expiry Date *</label>
+                    <label for="expiryDate" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Fecha de Vencimiento *</label>
                     <input id="expiryDate" name="expiryDate" type="text" required
                           [(ngModel)]="checkoutData.expiryDate"
                           (input)="formatExpiryDate($event)"
@@ -164,7 +163,7 @@
       <div class="lg:col-span-5">
         <div class="bg-white dark:bg-slate-800 shadow-2xl rounded-xl p-8 sticky top-8">
           <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-6 pb-2 border-b border-gray-200 dark:border-slate-600">
-            Order Summary
+            Detalles de la orden
           </h3>
 
           <div class="space-y-4 mb-6">
@@ -177,10 +176,10 @@
                 <p class="text-sm text-gray-500 dark:text-gray-400">
                   {{ detalle.producto.producto.categoria }} -
                   Color: {{ detalle.producto.color.nombre }},
-                  Size: {{ detalle.producto.talla.nombre }}
+                  Talla: {{ detalle.producto.talla.nombre }}
                 </p>
                 <div class="flex items-center mt-1">
-                  <span class="text-sm text-gray-500 dark:text-gray-400">Qty: {{ detalle.cantidad }}</span>
+                  <span class="text-sm text-gray-500 dark:text-gray-400">Cantidad: {{ detalle.cantidad }}</span>
                 </div>
               </div>
               <div class="text-right">
@@ -197,7 +196,7 @@
             </div>
 
             <div class="flex justify-between items-center">
-              <span class="text-gray-600 dark:text-gray-400">Shipping</span>
+              <span class="text-gray-600 dark:text-gray-400">Envio</span>
               <span class="font-medium text-gray-900 dark:text-white">
                 {{ invoiceData.envio ? ('$' + (invoiceData.envio.precio | number:'1.2-2')) : 'Free' }}
               </span>
